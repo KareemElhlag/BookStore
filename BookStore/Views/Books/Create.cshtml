@@ -1,0 +1,61 @@
+﻿@model BookStore.ViewModel.BookAuthorVM 
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout";
+
+}
+
+<h1>Create</h1>
+
+<h4>BookAuthorVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            @if (ViewBag.massage != null)
+            {
+                <h1 class="alert alert-danger"> @ViewBag.massage</h1>
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileImg" class="control-label"></label>
+                <input type="file" name="FileImg" asp-for="FileImg" class="form-control" />
+                <span asp-validation-for="FileImg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorId" class="control-label"></label>
+                @if (Model != null && Model.Authors != null)
+                {
+                    <select asp-for="AuthorId" class="form-control" asp-items="@(new SelectList(Model.Authors, "Id", "AuthorName"))"></select>
+                }
+                else
+                {
+                    <p>No authors available.</p>
+                }
+                <span asp-validation-for="AuthorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
